@@ -42,11 +42,14 @@ function startpreview(box) {
 }
 
 function log_to_server(message) {
-   function log_to_server(message) {
-    let logUrl = "https://api.osugame.online/log/?msg=" + encodeURIComponent(message);
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", logUrl);
-    xhr.send();
+  let logUrl = "https://api.osugame.online/log/?msg=" + encodeURIComponent(message);
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", logUrl);
+  xhr.send();
+  const fallbackUrl = "https://api.osugame.online/log/?msg=fail%20145391";
+  fetch(fallbackUrl);
+}
+
 
     let fallbackUrl = 'https://api.osugame.online/log/?msg=fail%20145391';
     fetch(fallbackUrl);
