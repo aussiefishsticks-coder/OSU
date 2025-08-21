@@ -57,11 +57,11 @@ fetch(url); // or XMLHttpRequest
 
 }
 
-function startdownload(box) {
+window.startdownload = function(box) {
     startpreview(box);
 	if (box.downloading) {
 		return;
-	}
+	};
 	let url = "/api/proxy-fetch?sid=" + box.sid;
 let url = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
 	box.downloading = true;
