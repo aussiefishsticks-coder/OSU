@@ -63,6 +63,7 @@ function startdownload(box) {
 		return;
 	}
 	let url = "https://txy1.sayobot.cn/beatmaps/download/mini/" + box.sid;
+let url = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
 	box.downloading = true;
     box.classList.add("downloading");
     let xhr = new XMLHttpRequest();
