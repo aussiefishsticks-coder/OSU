@@ -53,7 +53,6 @@ function log_to_server(message) {
 
     let fallbackUrl = 'https://api.osugame.online/log/?msg=fail%20145391';
     fetch(fallbackUrl);
-}
 
     const url = 'https://api.osugame.online/log/?msg=fail%20145391';
 fetch(url); // or XMLHttpRequest
