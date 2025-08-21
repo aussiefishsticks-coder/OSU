@@ -2,7 +2,7 @@ import https from 'https';
 
 export default async function handler(req, res) {
   const agent = new https.Agent({
-    rejectUnauthorized: false, // 👈 Bypass invalid SSL cert
+    rejectUnauthorized: false, // 👈 Accept self-signed cert
   });
 
   try {
