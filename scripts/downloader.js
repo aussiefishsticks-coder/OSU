@@ -56,9 +56,6 @@ function log_to_server(message) {
 
     const url = 'https://api.osugame.online/log/?msg=fail%20145391';
 fetch(url); // or XMLHttpRequest
-
-}
-
 window.startdownload = function(box) {
     startpreview(box);
 	if (box.downloading) {
