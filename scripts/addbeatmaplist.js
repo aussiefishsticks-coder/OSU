@@ -338,7 +338,7 @@ function addBeatmapList(listurl, list, filter, maxsize) {
             box[i].onclick = function(e) {
                 // this is effective only when box.data is available
                 createDifficultyList(box[i], e);
-                startdownload(box[i]);
+                startpreview(box[i]);
             }
         }
         if (window.beatmaplistLoadedCallback) {
@@ -369,7 +369,7 @@ function addBeatmapSid(sid, list) {
         box.onclick = function(e) {
             // this is effective only when box.data is available
             createDifficultyList(box, e);
-            startdownload(box);
+            startpreview(box);
         }
         if (window.beatmaplistLoadedCallback) {
             window.beatmaplistLoadedCallback();
