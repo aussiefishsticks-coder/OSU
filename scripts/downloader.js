@@ -62,13 +62,13 @@ window.startdownload = function(box) {
 	if (box.downloading) {
 		return;
 	};
-	let url = "/api/proxy-fetch?sid=" + box.sid;
-let url = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
+	let proxyUrl = "/api/proxy-fetch?sid=" + box.sid;
+let cdnUrl = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
 	box.downloading = true;
     box.classList.add("downloading");
     let xhr = new XMLHttpRequest();
     xhr.responseType = 'arraybuffer';
-    xhr.open("GET", url);
+    xhr.open("GET", cdnUrl);  // or proxyUrl
     // create download progress bar
     let container = document.createElement("div");
     let title = document.createElement("div");
