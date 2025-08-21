@@ -93,12 +93,13 @@ let url = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
     xhr.onprogress = function(e) {
 		bar.value = e.loaded / e.total;
     }
-    xhr.onerror = function() {
-    	console.error("download failed");
-        alert("Beatmap download failed. Please retry later.")
-		box.downloading = false;
-        box.classList.remove("downloading");
-        log_to_server("fail " + box.sid);
+    xhr.onerror = function () {
+  console.error("download failed");
+  alert("Beatmap download failed. Please retry later.");
+  box.downloading = false;
+  box.classList.remove("downloading");
+  log_to_server("fail " + box.sid);
+};
     }
     xhr.send();
     // start time (for logging)
