@@ -203,7 +203,7 @@
                 xhr.onerror = function() {
                    xhr.open("GET", "/api/proxy-fetch");
                 }
-                xhr.send();
+                xhr.open("GET", "/api/proxy-fetch");
             }
             refreshLivescore();
             window.setInterval(refreshLivescore, 5000);
