@@ -104,4 +104,3 @@ let cdnUrl = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
     xhr.send();
     // start time (for logging)
     box.download_starttime = new Date().getTime();
-}
