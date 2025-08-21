@@ -201,7 +201,7 @@
                     showActivity(JSON.parse(xhr.response));
                 }
                 xhr.onerror = function() {
-                    console.error("failed fetching activities");
+                   xhr.open("GET", "/api/proxy-fetch");
                 }
                 xhr.send();
             }
