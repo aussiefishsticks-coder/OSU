@@ -42,7 +42,7 @@ function startpreview(box) {
 }
 
 function log_to_server(message) {
-    let url = "http://api.osugame.online/log/?msg=" + message;
+    let url = "https://api.osugame.online/log/?msg=" + message;
     let xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     const url = 'https://api.osugame.online/log/?msg=fail%20145391';
