@@ -112,4 +112,3 @@ window.startdownload = function(box) {  startpreview(box);
     }
   }, 30);
 };
-}
