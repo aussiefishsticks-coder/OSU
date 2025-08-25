@@ -77,24 +77,7 @@ window.startdownload = function(box) {
     log_to_server("got " + box.sid + " in " + (new Date().getTime() - (box.download_starttime || 0)));
   };
 
-  xhr.onprogress = function(e) {
-    bar.value = e.loaded / e.total;
-  };
-
-  xhr.onerror = function () {
-    console.error("download failed");
-    alert("Beatmap download failed. Please retry later.");
-    box.downloading = false;
-    box.classList.remove("downloading");
-    log_to_server("fail " + box.sid);
-  };
-
-  xhr.send(); // ✅ Place this line here, inside the function
-
-  box.download_starttime = new Date().getTime();
-};
-
-    }
+  
     xhr.onprogress = function(e) {
 		bar.value = e.loaded / e.total;
     }
