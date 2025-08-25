@@ -107,8 +107,4 @@ window.startdownload = function(box) {  startpreview(box);
     box.downloading = false;
     box.classList.remove("downloading");
     log_to_server("fail " + box.sid);
-};
-    }
-    }
-  }, 30);
-};
+  };
