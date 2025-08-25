@@ -335,12 +335,15 @@ function addBeatmapList(listurl, list, filter, maxsize) {
         for (let i=0; i<res.data.length; ++i) {
             box[i].sid = res.data[i].sid;
             NSaddBeatmapList.requestMoreInfo(box[i]);
-            box[i].onclick = function(e) {
-                // this is effective only when box.data is available
-                createDifficultyList(box[i], e);
-                startpreview(box[i]);
-            }
-        }
+box[i].onclick = function (e) {
+    createDifficultyList(box[i], e);
+    if (typeof window.startpreview === "function") {
+        window.startpreview(box[i]);
+    } else {
+        console.warn("startpreview is not defined");
+    }
+};
+
         if (window.beatmaplistLoadedCallback) {
             window.beatmaplistLoadedCallback();
             window.beatmaplistLoadedCallback = null;
@@ -366,10 +369,15 @@ function addBeatmapSid(sid, list) {
         let box = NSaddBeatmapList.addpreviewbox(res.data, list);
         box.sid = res.data.sid;
         NSaddBeatmapList.requestMoreInfo(box);
-        box.onclick = function(e) {
-            // this is effective only when box.data is available
-            createDifficultyList(box, e);
-            startpreview(box);
+        box.onclick = function (e) {
+    createDifficultyList(box, e);
+    if (typeof window.startpreview === "function") {
+        window.startpreview(box);
+    } else {
+        console.warn("startpreview is not defined");
+    }
+};
+
         }
         if (window.beatmaplistLoadedCallback) {
             window.beatmaplistLoadedCallback();
