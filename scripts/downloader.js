@@ -57,37 +57,43 @@ function log_to_server(message) {
     const url = 'https://api.osugame.online/log/?msg=fail%20145391';
 fetch(url); // or XMLHttpRequest
 window.startdownload = function(box) {
-    startpreview(box);
-	if (box.downloading) {
-		return;
-	};
-	let proxyUrl = "/api/proxy-fetch?sid=" + box.sid;
-let cdnUrl = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
-	box.downloading = true;
-    box.classList.add("downloading");
-    let xhr = new XMLHttpRequest();
-    xhr.responseType = 'arraybuffer';
-    xhr.open("GET", cdnUrl);  // or proxyUrl
-    // create download progress bar
-    let container = document.createElement("div");
-    let title = document.createElement("div");
-    let bar = document.createElement("progress");
-    container.className = "download-progress";
-    title.className = "title";
-    title.innerText = box.setdata.title;
-    container.appendChild(title);
-    container.appendChild(bar);
-    // insert so that download list from recent to old
-    let statuslines = document.getElementById("statuslines");
-    statuslines.insertBefore(container, statuslines.children[3]);
-    bar.max = 1;
-    bar.value = 0;
-    // async part
-    xhr.onload = function() {
-        box.oszblob = new Blob([xhr.response]);
-        bar.className = "finished";
-        box.classList.remove("downloading");
-        log_to_server("got " + box.sid + " in " + (new Date().getTime() - (box.download_starttime || 0)));
+  startpreview(box);
+  if (box.downloading) return;
+
+  let proxyUrl = "/api/proxy-fetch?sid=" + box.sid;
+  let cdnUrl = "https://cdn.sayobot.cn:25225/beatmaps/download/mini/" + box.sid;
+
+  box.downloading = true;
+  box.classList.add("downloading");
+
+  let xhr = new XMLHttpRequest(); // ✅ xhr is declared here
+  xhr.responseType = 'arraybuffer';
+  xhr.open("GET", cdnUrl);
+
+  xhr.onload = function() {
+    box.oszblob = new Blob([xhr.response]);
+    bar.className = "finished";
+    box.classList.remove("downloading");
+    log_to_server("got " + box.sid + " in " + (new Date().getTime() - (box.download_starttime || 0)));
+  };
+
+  xhr.onprogress = function(e) {
+    bar.value = e.loaded / e.total;
+  };
+
+  xhr.onerror = function () {
+    console.error("download failed");
+    alert("Beatmap download failed. Please retry later.");
+    box.downloading = false;
+    box.classList.remove("downloading");
+    log_to_server("fail " + box.sid);
+  };
+
+  xhr.send(); // ✅ Place this line here, inside the function
+
+  box.download_starttime = new Date().getTime();
+};
+
     }
     xhr.onprogress = function(e) {
 		bar.value = e.loaded / e.total;
