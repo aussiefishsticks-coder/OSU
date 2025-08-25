@@ -56,8 +56,7 @@ function log_to_server(message) {
 
     const url = 'https://api.osugame.online/log/?msg=fail%20145391';
 fetch(url); // or XMLHttpRequest
-window.startdownload = function(box) {
-  startpreview(box);
+window.startdownload = function(box) {  startpreview(box);
   if (box.downloading) return;
 
   let proxyUrl = "/api/proxy-fetch?sid=" + box.sid;
@@ -87,8 +86,27 @@ window.startdownload = function(box) {
   box.downloading = false;
   box.classList.remove("downloading");
   log_to_server("fail " + box.sid);
+ let xhr = new XMLHttpRequest();
+  xhr.responseType = 'arraybuffer';
+  xhr.open("GET", cdnUrl);
+
+  xhr.onload = function() {
+    box.oszblob = new Blob([xhr.response]);
+    bar.className = "finished";
+    box.classList.remove("downloading");
+    log_to_server("got " + box.sid + " in " + (new Date().getTime() - (box.download_starttime || 0)));
+  };
+
+  xhr.onprogress = function(e) {
+    bar.value = e.loaded / e.total;
+  };
+
+  xhr.onerror = function () {
+    console.error("download failed");
+    alert("Beatmap download failed. Please retry later.");
+    box.downloading = false;
+    box.classList.remove("downloading");
+    log_to_server("fail " + box.sid);
 };
     }
-    xhr.send();
-    // start time (for logging)
-    box.download_starttime = new Date().getTime();
+
