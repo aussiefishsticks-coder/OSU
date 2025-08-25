@@ -109,3 +109,7 @@ window.startdownload = function(box) {  startpreview(box);
     log_to_server("fail " + box.sid);
 };
     }
+    }
+  }, 30);
+};
+}
