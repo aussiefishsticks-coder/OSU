@@ -378,6 +378,7 @@ function addBeatmapSid(sid, list) {
     }
 };
 
+
         }
         if (window.beatmaplistLoadedCallback) {
             window.beatmaplistLoadedCallback();
